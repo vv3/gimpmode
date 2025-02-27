@@ -54,7 +54,8 @@
 	  (lambda ()
 	    (require 'snippet)
 	    (require 'scheme-complete)
-	    (autoload 'eldoc-current-symbol "eldoc"))))
+	    ;;(autoload 'eldoc-current-symbol "eldoc")
+            )))
       '(gimp-mode-hook gimp-help-mode-hook inferior-gimp-mode-hook)) 
 
 (add-to-list 'auto-mode-alist
@@ -79,4 +80,3 @@
    lambda nil
    (insert ";; -*- mode: Gimp; -*-\n")
    (snippet-insert (eval gimp-registration-snippet))))
-

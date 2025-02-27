@@ -4067,8 +4067,8 @@ when scheme-complete can't infer the current implementation."
   (with-output-to-string (princ sexp)))
 
 (defun scheme-get-current-symbol-info ()
-  (let* ((sym (eldoc-current-symbol))
-         (fnsym0 (eldoc-fnsym-in-current-sexp))
+  (let* ((sym (elisp--current-symbol))
+         (fnsym0 (elisp--fnsym-in-current-sexp))
          (fnsym (if (consp fnsym0) (car fnsym0) fnsym0))
          (env (save-excursion
                 (if (scheme-in-string-p) (scheme-beginning-of-string))
@@ -4110,4 +4110,3 @@ when scheme-complete can't infer the current implementation."
 ;; Local Variables:
 ;; eval: (put 'scheme-with-find-file 'lisp-indent-hook 1)
 ;; End:
-
