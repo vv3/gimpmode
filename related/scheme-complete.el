@@ -312,7 +312,7 @@
    ;; SRFI 0
    ("Feature-based conditional expansion construct"
     (cond-expand (syntax (clause \.\.\.))))
-   
+
    ;; SRFI 1
    ("List Library"
     (xcons (lambda (object object) pair))
@@ -2730,7 +2730,7 @@
          (let ((res (split-string home ";")))
            (if (member *scheme-chicken-repo-dirs* res)
                res
-             (cons *scheme-chicken-repo-dirs* res))) 
+             (cons *scheme-chicken-repo-dirs* res)))
        (list *scheme-chicken-base-repo*)))))
 
 (defun scheme-chicken-available-modules (&optional sym)
@@ -3386,7 +3386,7 @@ when scheme-complete can't infer the current implementation."
            (let ((sexp (scheme-nth-sexp-at-point 0)))
              `((,(caaddr sexp) (lambda ,(cdaddr sexp)))
                (,(cadddr sexp) (lambda (obj)))
-               ,@(scheme-append-map 
+               ,@(scheme-append-map
                   #'(lambda (x)
                       (if (consp x)
                           (if (consp (cddr x))
@@ -3460,7 +3460,7 @@ when scheme-complete can't infer the current implementation."
         ((chicken)
          (let ((predefined (assq mod *scheme-chicken-modules*)))
            (if predefined
-               (cdr predefined) 
+               (cdr predefined)
              (mapcar
               #'(lambda (x) (cons x '((lambda obj))))
               (or (mapcar #'intern

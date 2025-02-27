@@ -22,7 +22,7 @@
 
  ;; Check whether first time
 ;; Put this in your .emacs (load-file "~/.emacs.d/gimp/gimp-init.el")
-(defvar gimp-mode-dir 
+(defvar gimp-mode-dir
   (file-name-directory
    (or load-file-name buffer-file-name)))
 
@@ -43,7 +43,7 @@
 	gimp-help
 	gimp-selector
 	gimp-open-image
-	gimp-cl-connect))    
+	gimp-cl-connect))
 
 (autoload 'gimp-install "gimp-install.el")
 ;; Uncomment the following line to have a nice selector:
@@ -56,7 +56,7 @@
 	    (require 'scheme-complete)
 	    ;;(autoload 'eldoc-current-symbol "eldoc")
             )))
-      '(gimp-mode-hook gimp-help-mode-hook inferior-gimp-mode-hook)) 
+      '(gimp-mode-hook gimp-help-mode-hook inferior-gimp-mode-hook))
 
 (add-to-list 'auto-mode-alist
 	     '("\\(s-f-\\|script-fu\\).*\\.scm\\'" . gimp-mode))
@@ -66,7 +66,7 @@
   (when (and (buffer-file-name) (string-match "gimp.*\.scm\\'" (buffer-file-name)))
     t))
 
-(add-to-list 'magic-mode-alist 
+(add-to-list 'magic-mode-alist
 	     '(gimp-script-p . gimp-mode))
 
 ;; auto-insert-alist is *not* automatically loaded in a vanilla
@@ -74,9 +74,9 @@
 (auto-insert-mode)
 (auto-insert-mode)
 
-(add-to-list 
+(add-to-list
  'auto-insert-alist
- '(gimp-mode 
+ '(gimp-mode
    lambda nil
    (insert ";; -*- mode: Gimp; -*-\n")
    (snippet-insert (eval gimp-registration-snippet))))
