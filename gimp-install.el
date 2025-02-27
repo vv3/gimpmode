@@ -55,7 +55,7 @@ For more information consult the file README."
                (or load-file-name buffer-file-name)))
          (gimp-version
           (let ((command (shell-command-to-string "gimp --version")))
-            (string-match "[0-9]\.[0-9]" command)
+            (string-match "[0-9]+\.[0-9]+" command)
             (match-string 0 command)))
          (gimp-dir
           (or to-dir
