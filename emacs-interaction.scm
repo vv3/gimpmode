@@ -34,14 +34,14 @@
 ;; completion)
 (define emacs-only-bound-symbols? TRUE)
 
-(define emacs-dir 
+(define emacs-dir
   (string-append gimp-dir "/emacs/"))
 
 (define (make-emacs-file file)
   (string-append emacs-dir file))
 
 (define-macro (with-output-to-emacs-file  file . form)
-  `(with-output-to-file 
+  `(with-output-to-file
        ,(make-emacs-file file)
      (lambda () ,@form)))
 
@@ -64,7 +64,7 @@
         (else ())))
 
 (define (script-fu-dump-for-emacs only-bound? menu? fonts? brushes? patterns? gradients? palettes?)
-  
+
   (when (= menu? TRUE)
         (with-output-to-emacs-file
          "emacs-gimp-menu" ;menu entries for plugins
@@ -103,10 +103,8 @@
 
 
 (script-fu-register "script-fu-dump-for-emacs"
-		    (if (>= (string->number (substring (car (gimp-version)) 0 3)) 2.5)
-			 "<Image>/Filters/Languages/Script-Fu/Dump internals for Emacs' Gimp Mode..."
-			 "<Toolbox>/Xtns/Languages/Script-Fu/Dump internals for Emacs' Gimp Mode...")
-                    _"Dump (part of) the oblist, fonts, the menu structure and
+		    "Dump internals for Emacs' Gimp Mode..."
+		    _"Dump (part of) the oblist, fonts, the menu structure and
 the procedural database more for use with Emacs' Gimp Mode which you can find at
 http://niels.kicks-ass.org/gimpmode.
 
@@ -135,23 +133,27 @@ debugging)."
 		    SF-TOGGLE	_"Dump patterns?"	TRUE
 		    SF-TOGGLE	_"Dump gradients?"	TRUE
 		    SF-TOGGLE	_"Dump palettes"	TRUE)
-                                                             
-;; Fix error hook; ToDo: file bug-report (original has (apply (pop-handler)) 
+
+(script-fu-menu-register "script-fu-dump-for-emacs" "<Toolbox>/Xtns/Languages/Script-Fu/Dump internals for Emacs' Gimp Mode...")
+
+
+
+;; Fix error hook; ToDo: file bug-report (original has (apply (pop-handler))
 ;; instead of (apply (pop-handler) x))
 (define *error-hook* (lambda x (if (more-handlers?) (apply (pop-handler) x) (apply error x))))
 
 (define *emacs-cl-output* nil)
 ;; Evals once, loads evaluated expression into image, writes output of
 ;; evaluation back, overwrites *error-hook*. Does not solve (or:
-;; introduces) write, display and read problems. 
+;; introduces) write, display and read problems.
 (define-macro (emacs-cl-output . body)
     (let ((input-file "emacs-input.scm")
           (output-file "emacs-output.scm"))
       (unless (memq gimp-cl-handler *handlers*)
               (push-handler gimp-cl-handler))
-      `(begin 
+      `(begin
          (with-output-to-emacs-file ,input-file
-             (write 
+             (write
               '(set! *emacs-cl-output*  ,@body))
 	     (newline)
              (write '(with-output-to-emacs-file
@@ -160,7 +162,7 @@ debugging)."
 	     (newline))
          (load ,(make-emacs-file input-file)))))
 
-(define gimp-cl-handler 
+(define gimp-cl-handler
   (lambda x
     (with-output-to-emacs-file
         "emacs-output.scm"
@@ -173,4 +175,3 @@ debugging)."
     (begin
       (script-fu-dump-for-emacs emacs-only-bound-symbols? TRUE TRUE TRUE TRUE TRUE TRUE)
       (set! emacs-first-time? #f)))
-
