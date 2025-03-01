@@ -158,6 +158,16 @@ stuff depending on it."
      (concat gmd "related/snippet.el"))
     (gimp-install-message)))
 
-(gimp-install)
+(if (eq window-system 'x)
+    (let* ((gimp-version
+            (let ((command (shell-command-to-string "gimp --version")))
+              (string-match "[0-9]+\.[0-9]+" command)
+            (match-string 0 command)))
+           (gimp-dir (expand-file-name
+                     (concat "~/.config/GIMP/" gimp-version "/")))
+           )
+      (gimp-install gimp-dir))
+  (gimp-install))
+
 
 ;; (provide 'gimp-install)
