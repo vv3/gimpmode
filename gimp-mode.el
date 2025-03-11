@@ -1353,7 +1353,7 @@ buffer, is found."
    (comint-check-proc scheme-buffer)))
 
 (defvar gimp-error-must-run-gimp-error-message
-  "You must execute `run-gimp' one time at least,\
+  "You must execute run-gimp one time at least,\
  in order to populate symbol completion tables from within GIMP."
   "Error message to emit when the user must run GIMP first\
  to populate symbol completion tables.")
