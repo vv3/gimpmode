@@ -3255,7 +3255,7 @@ the error is not expected and an error is thrown.
 \nKeywords supported:  :use-nil-dump-file :dont-trap :validator \
 :preconditioner :error-checker
 \n(fn TEST-NAME FUNCTION-TO-TEST EXPRESSION [KEYWORD VALUE]...)"
-  (cl-parsing-keywords
+  (cl--parsing-keywords
       (:expression :use-nil-dump-file :dont-trap :validator :preconditioner :error-checker) ()
     (let ((tmp-scm-file (make-temp-file "gimp-mode-test" nil ".scm"))
 	  ;; Set gimp-dump to nil temporarily to simulate that the GIMP dump file
