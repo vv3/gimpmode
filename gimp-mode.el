@@ -1237,6 +1237,7 @@ or run command `gimp-cl-connect'.")
       (gimp-restore-input-ring)
       (unless gimp-inhibit-start-up-message
 	(gimp-shortcuts t))
+      (message "Informing gimp/script-fu that it was started from emacs: %s" (gimp-eval-to-string "(define gimp-is-started-from-emacs #t)"))
       (process-put (gimp-proc) 'listening t)
       (message "%s The GIMP is loaded. Have FU." (or (current-message) ""))))
     (setq buffer-read-only nil)))
