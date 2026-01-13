@@ -113,7 +113,8 @@ HINT is the help-echo, and face the gimp-FACE-face."
 
 (defface gimp-menu-face
   '((t (:foreground "#7f8c29"
-        :box '(:line-width 2 :color grey15)
+        ; :box '(:line-width 2 :color grey15)
+        :box t
         :height 1.2
         :bold t
         )))
