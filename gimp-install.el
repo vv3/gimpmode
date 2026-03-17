@@ -54,7 +54,7 @@ For more information consult the file README."
   (let* ((gmd (file-name-directory
                (or load-file-name buffer-file-name)))
          (gimp-version
-          (let ((command (shell-command-to-string "gimp --version")))
+          (let ((command (shell-command-to-string "gimp --version 2>/dev/null")))
             (string-match "[0-9]+\.[0-9]+" command)
             (match-string 0 command)))
          (gimp-dir
@@ -160,7 +160,7 @@ stuff depending on it."
 
 (if (eq window-system 'x)
     (let* ((gimp-version
-            (let ((command (shell-command-to-string "gimp --version")))
+            (let ((command (shell-command-to-string "gimp --version 2>/dev/null")))
               (string-match "[0-9]+\.[0-9]+" command)
             (match-string 0 command)))
            (gimp-dir (expand-file-name
